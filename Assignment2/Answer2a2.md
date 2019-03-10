@@ -21,3 +21,4 @@ $\begin{aligned}
 &= -\cfrac{\partial<\log\hat{y}^T, y>}{\partial \hat{y}} \\
 &= \log'\hat{y}^T \circ y
 \end{aligned}$
+
