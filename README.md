@@ -1,5 +1,8 @@
 # CS224n-winter19
-Some assignments and the final project of CS224n
+
+Solutions for **CS224n, winter, 2019.**
+Welcome to discuss problems appearing in assigments, **please** submit to issue.
+Also take notes for the key point in lectures.
 
 -
     - [x] Assignment1

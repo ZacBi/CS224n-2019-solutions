@@ -17,7 +17,7 @@ def sigmoid(x):
     """
 
     ### YOUR CODE HERE
-    s = 1 / (1 + np.exp(x))
+    s = 1 / (1 + np.exp(-x))
     ### END YOUR CODE
 
     return s
@@ -57,14 +57,10 @@ def naiveSoftmaxLossAndGradient(
     ### Please use the provided softmax function (imported earlier in this file)
     ### This numerically stable implementation helps you avoid issues pertaining
     ### to integer overflow.
-    # centerWordVec = centerWordVec[np.newaxis, :]
-    # y_hat = softmax(centerWordVec.dot(outsideVectors.T))
     y_hat = softmax(np.dot(centerWordVec, outsideVectors.T))
     delta = y_hat.copy()
     delta[outsideWordIdx] -= 1
 
-    # gradCenterVec = delta.dot(outsideVectors)
-    # gradOutsideVecs = delta.T.dot(centerWordVec)
     loss = -np.log(y_hat)[outsideWordIdx]
     gradCenterVec = np.dot(delta, outsideVectors)
     gradOutsideVecs = np.dot(delta[:, np.newaxis], centerWordVec[np.newaxis, :])
@@ -115,18 +111,33 @@ def negSamplingLossAndGradient(
     ### YOUR CODE HERE
 
     ### Please use your implementation of sigmoid in here.
-    allVecs = outsideVectors[indices]
-    allScores = np.dot(allVecs, centerWordVec)
+    gradOutsideVecs = np.zeros(outsideVectors.shape)
+    gradCenterVec = np.zeros(centerWordVec.shape)
+    loss = 0.0
+    # allVecs = outsideVectors[indices]
+    # allScores = np.dot(allVecs, centerWordVec)
 
-    loss = - np.log(sigmoid(allScores[0])) - np.sum(np.log(sigmoid(-allScores[1:])))
-    # maybe the equation below is wrong
-    gradCenterVec = -(1 - allScores[0]) * allVecs[0] + (1 - sigmoid(-allScores[1:])).dot(allVecs[1:])
+    # loss = - np.log(sigmoid(allScores[0])) - np.sum(np.log(sigmoid(-allScores[1:])))
+    # # maybe the equation below is wrong
+    # gradCenterVec = (allScores[0] - 1) * allVecs[0] + (1 - sigmoid(-allScores[1:])).dot(allVecs[1:])
 
-    gradOutsideVecs = np.zeros_like(outsideVectors)
-    gradOutsideVecs[outsideWordIdx] += - (1 - sigmoid(allScores[0])) * centerWordVec
-    for negSampleWordIdx, i in zip(negSampleWordIndices, range(1, len(indices))):
-        gradOutsideVecs[negSampleWordIdx] += (
-            1 - sigmoid(-allScores[i])) * allVecs[i]
+    # gradOutsideVecs = np.zeros_like(outsideVectors)
+    # gradOutsideVecs[outsideWordIdx] -= (1 - sigmoid(allScores[0])) * centerWordVec
+    # for negSampleWordIdx, i in zip(negSampleWordIndices, range(1, len(indices))):
+    #     gradOutsideVecs[negSampleWordIdx] += (
+    #         1 - sigmoid(-allScores[i])) * allVecs[i]
+    z = sigmoid(np.dot(outsideVectors[outsideWordIdx], centerWordVec))
+    loss -= np.log(z)
+
+    gradOutsideVecs[outsideWordIdx] += centerWordVec * (z - 1.0)
+    gradCenterVec += outsideVectors[outsideWordIdx] * (z - 1.0)
+
+    for k in range(K):
+        samp = indices[k+1]
+        z = sigmoid(np.dot(-outsideVectors[samp], centerWordVec))
+        loss -= np.log(z)
+        gradOutsideVecs[samp] -=  centerWordVec * (z - 1.0)
+        gradCenterVec -= outsideVectors[samp] * (z - 1.0)
 
     ### END YOUR CODE
 
