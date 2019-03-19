@@ -30,19 +30,36 @@ $\mathrm{ii.}$&emsp;If we apply dropout during evaluation, we'll get a random(un
 
 #### (a)
 
-$$
+<!-- $$
 \begin{array}{|l|l|l|l} Stack & Buffer & New dependency & Transition \\
 \hline
 [Root] & [this, sentence, correctly] & ROOT \rightarrow pased & RIGHT-ARC \\
 [Root, this] & [sentence, correctly] &  & SHIFT \\
 [Root, this, sentence] & [correctly] &  & SHIFT \\
 [Root, sentence] & [correctly] & sentence \rightarrow this & LEST-ARC \\SHIFT \\
-\end{array}$$
+\end{array}$$ -->
 
-<!-- [Root, parsed] & [this, sentence, correctly] & parsed \rightarrow I & LEFT-ARC \\
+&emsp;&emsp;We can't remove parsed at the first step otherwise it wll disobey the condition.
+
+$$
+\begin{array}{|l|l|l|l} Stack & Buffer & New dependency & Transition \\
+\hline
+[Root, parsed] & [this, sentence, correctly] & parsed \rightarrow I & LEFT-ARC \\
 [Root, parsed, this] & [sentence, correctly] &   & SHIFT \\
 [Root, parsed, this, sentence] & [correctly] &   & SHIFT \\
 [Root, parsed, sentence] & [correctly] & this \rightarrow sentence & LEFT-ARC \\
 [Root, parsed] & [correctly] & parsed \rightarrow sentence & RIGHT-ARC \\
 [Root, parsed, correctly] & [] & & SHIFT \\
-[Root, parsed, correctly] & [] & & SHIFT -->
+[Root, parsed] & [] & parsed \rightarrow correctly & RIGHT-ARE \\
+[Root] & [] & Root \rightarrow parsed & RIGHT-ARE
+\end{array}$$
+
+#### (b)
+
+&emsp;&emsp;$n-1$ steps.
+&emsp;&emsp;There is and only is a dependency between two words, and every word only relate to a dependency. So there is $n-1$ steps.(I don't consider ROOT, otherwise it's n steps)
+
+#### (c)
+
+&emsp;&emsp;
+
