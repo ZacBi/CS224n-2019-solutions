@@ -20,7 +20,7 @@ $$\begin{aligned}
     \mathbb{E}_{p_{drop}}[\mathbf{h}_{drop}]_i &= \mathbb{E}_{p_{drop}}[\gamma \mathbf{d} \circ \mathbf{h}]_i \\
     &= \gamma \mathbb{E}_{p_{drop}}[d_i h_i] \\
     &= \gamma 0.8h_i
-\end{aligned}$$
+\end{aligned} $$
 
 &emsp;&emsp;Now we make $\gamma 0.8h_i = h_i$, so $\gamma = 1.25$
 
@@ -28,4 +28,21 @@ $\mathrm{ii.}$&emsp;If we apply dropout during evaluation, we'll get a random(un
 
 ### 2. Neural Transition-Based Dependency Parsing
 
+#### (a)
 
+$$
+\begin{array}{|l|l|l|l} Stack & Buffer & New dependency & Transition \\
+\hline
+[Root] & [this, sentence, correctly] & ROOT \rightarrow pased & RIGHT-ARC \\
+[Root, this] & [sentence, correctly] &  & SHIFT \\
+[Root, this, sentence] & [correctly] &  & SHIFT \\
+[Root, sentence] & [correctly] & sentence \rightarrow this & LEST-ARC \\SHIFT \\
+\end{array}$$
+
+<!-- [Root, parsed] & [this, sentence, correctly] & parsed \rightarrow I & LEFT-ARC \\
+[Root, parsed, this] & [sentence, correctly] &   & SHIFT \\
+[Root, parsed, this, sentence] & [correctly] &   & SHIFT \\
+[Root, parsed, sentence] & [correctly] & this \rightarrow sentence & LEFT-ARC \\
+[Root, parsed] & [correctly] & parsed \rightarrow sentence & RIGHT-ARC \\
+[Root, parsed, correctly] & [] & & SHIFT \\
+[Root, parsed, correctly] & [] & & SHIFT -->
