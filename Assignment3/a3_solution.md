@@ -23,7 +23,7 @@ $$\begin{aligned}
 \end{aligned} $$
 
 &emsp;&emsp;Now we make $\gamma 0.8h_i = h_i$, so $\gamma = 1.25$
-
+    
 $\mathrm{ii.}$&emsp;If we apply dropout during evaluation, we'll get a random(uncertain) result for the keep_prob, that's bad for evaluation.
 
 ### 2. Neural Transition-Based Dependency Parsing

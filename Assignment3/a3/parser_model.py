@@ -61,7 +61,7 @@ class ParserModel(nn.Module):
         ###         It has been shown empirically, that this provides better initial weights
         ###         for training networks than random uniform initialization.
         ###         For more details checkout this great blogpost:
-        ###             http://andyljones.tumblr.com/post/110998971763/an-explanation-of-xavier-initialization 
+        ###             http://andyljones.tumblr.com/post/110998971763/an-explanation-of-xavier-initialization
         ### Hints:
         ###     - After you create a linear layer you can access the weight
         ###       matrix via:
@@ -72,7 +72,15 @@ class ParserModel(nn.Module):
         ###     Xavier Init: https://pytorch.org/docs/stable/nn.html#torch.nn.init.xavier_uniform_
         ###     Dropout: https://pytorch.org/docs/stable/nn.html#torch.nn.Dropout
 
-        
+        # hidden layer
+        self.embed_to_hidden = nn.Linear(self.n_features*self.embed_size, self.hidden_size)
+        nn.init.xavier_uniform_(self.embed_to_hidden.weight)
+        self.dropout = nn.Dropout(self.dropout_prob)
+        self.hidden_to_logits = nn.Linear(self.hidden_size, self.n_classes)
+        nn.init.xavier_uniform_(self.hidden_to_logits.weight)
+
+
+
 
 
         ### END YOUR CODE
@@ -105,6 +113,9 @@ class ParserModel(nn.Module):
         ###  Please see the following docs for support:
         ###     Embedding Layer: https://pytorch.org/docs/stable/nn.html#torch.nn.Embedding
         ###     View: https://pytorch.org/docs/stable/tensors.html#torch.Tensor.view
+
+        x = self.pretrained_embeddings(t)
+        x = x.view(x.size()[0], -1)
 
 
         ### END YOUR CODE
@@ -143,6 +154,11 @@ class ParserModel(nn.Module):
         ###
         ### Please see the following docs for support:
         ###     ReLU: https://pytorch.org/docs/stable/nn.html?highlight=relu#torch.nn.functional.relu
+        embeddings = self.embedding_lookup(t)
+        h = self.embed_to_hidden(embeddings)
+        nn.functional.relu_(h)
+        h_dropout = self.dropout(h)
+        logits = self.hidden_to_logits(h_dropout)
 
 
         ### END YOUR CODE
