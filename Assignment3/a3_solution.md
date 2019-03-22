@@ -5,7 +5,7 @@
 #### (a)
 
 <!-- **i** We all konw that as our parameter $\theta$ closing to the convex minima, the gradient of loss function wrt $\theta$ will be smaller, when our loss func hits the best solution, $\nabla_\theta{J}$ may become 0. So in the update method,  -->
-$\mathrm{i.}$&emsp;Image the shape of loss function $J$ is a bowl in 3-D space. We could consider the gradient of $J$ wrt $\theta$, is a 'force'(also could be acceleration) push the loss function downward the slope of the bowl, and the $m$ is a 'velocity' controls the speed and direction. With the help of acceleration, the loss function $J$ could be more faster to convergence, however, the factor(hyperparameter) $\beta_1$ could be considered as a friction force preventing $J$ from overshooting.
+$\mathrm{i.}$&emsp;Image that the shape of loss function $J$ likes a bowl in 3-D space. We could consider the gradient of $J$ wrt $\theta$, is a 'force'(also could be acceleration) push the loss function downward the slope of the bowl, and the $m$ is a 'velocity' controls the speed and direction. With the help of acceleration, the loss function $J$ could be more faster to convergence, however, the factor(hyperparameter) $\beta_1$ could be considered as a friction force preventing $J$ from overshooting.
 &emsp;&emsp;The low variance could help $J$ reduce the vibration on the verical direction while downward to the convergence point.
 
 $\mathrm{ii.}$&emsp;
