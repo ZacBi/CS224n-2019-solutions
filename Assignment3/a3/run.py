@@ -120,8 +120,8 @@ def train_for_epoch(parser, train_data, dev_data, optimizer, loss_func, batch_si
 
 if __name__ == "__main__":
     # Note: Set debug to False, when training on entire corpus
-    debug = True
-    # debug = False
+    # debug = True
+    debug = False
 
     assert(torch.__version__ == "1.0.1"),  "Please install torch version 1.0.1"
 
