@@ -76,7 +76,7 @@ class NMT(nn.Module):
             embed_size,
             self.hidden_size,
             dropout=self.dropout_rate,
-            bidirectiona=True
+            bidirectional=True
         )
         self.decoder = nn.LSTMCell(embed_size, self.hidden_size)
         self.h_projection = nn.Linear(2*self.hidden_size, self.hidden_size, bias=False)
@@ -185,7 +185,7 @@ class NMT(nn.Module):
 
         X = self.model_embeddings.source(source_padded)
         enc_hiddens, (last_hidden, last_cell) = self.decoder(
-            pack_padded_sequence(X, input=source_lengths))
+            pack_padded_sequence(X, source_lengths))
         enc_hiddens = pad_packed_sequence(enc_hiddens, batch_first=True)[0]
         last_hidden = torch.cat((last_hidden[0, :], last_hidden[1, :]), 1)
         init_decoder_hidden = self.h_projection(last_hidden)
