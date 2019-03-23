@@ -184,7 +184,7 @@ class NMT(nn.Module):
         # and why We should apply 'pack_padded_sequence' to sents embedding matrix
 
         X = self.model_embeddings.source(source_padded)
-        enc_hiddens, (last_hidden, last_cell) = self.decoder(
+        enc_hiddens, (last_hidden, last_cell) = self.encode(
             pack_padded_sequence(X, source_lengths))
         enc_hiddens = pad_packed_sequence(enc_hiddens, batch_first=True)[0]
         last_hidden = torch.cat((last_hidden[0, :], last_hidden[1, :]), 1)
