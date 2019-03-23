@@ -118,7 +118,7 @@ class NMT(nn.Module):
         ###     4. Compute log probability distribution over the target vocabulary using the
         ###        combined_outputs returned by the `self.decode()` function.
 
-        enc_hiddens, dec_init_state = self.encode(source_padded, source_lengths)
+        enc_hiddens, dec_init_state = self.encoder(source_padded, source_lengths)
         enc_masks = self.generate_sent_masks(enc_hiddens, source_lengths)
         combined_outputs = self.decode(enc_hiddens, enc_masks, dec_init_state, target_padded)
         P = F.log_softmax(self.target_vocab_projection(combined_outputs), dim=-1)
@@ -184,12 +184,12 @@ class NMT(nn.Module):
         # and why We should apply 'pack_padded_sequence' to sents embedding matrix
 
         X = self.model_embeddings.source(source_padded)
-        enc_hiddens, (last_hidden, last_cell) = self.encode(
+        enc_hiddens, (last_hidden, last_cell) = self.encoder(
             pack_padded_sequence(X, source_lengths))
         enc_hiddens = pad_packed_sequence(enc_hiddens, batch_first=True)[0]
         last_hidden = torch.cat((last_hidden[0, :], last_hidden[1, :]), 1)
         init_decoder_hidden = self.h_projection(last_hidden)
-        last_cell = torch.cat((last_cell[0, :]), last_cell[1, :], 1)
+        last_cell = torch.cat((last_cell[0, :], last_cell[1, :]), 1)
         init_decoder_cell = self.c_projection(last_cell)
         dec_init_state = (init_decoder_hidden, init_decoder_cell)
 
