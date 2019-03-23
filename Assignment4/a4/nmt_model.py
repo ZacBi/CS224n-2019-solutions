@@ -42,7 +42,7 @@ class NMT(nn.Module):
         self.vocab = vocab
 
         # default values
-        self.encoder = None 
+        self.encoder = None
         self.decoder = None
         self.h_projection = None
         self.c_projection = None
@@ -72,6 +72,22 @@ class NMT(nn.Module):
         ###         https://pytorch.org/docs/stable/nn.html#torch.nn.Linear
         ###     Dropout Layer:
         ###         https://pytorch.org/docs/stable/nn.html#torch.nn.Dropout
+        self.encoder = nn.LSTM(
+            embed_size,
+            self.hidden_size,
+            dropout=self.dropout_rate,
+            bidirectiona=True
+        )
+        self.decoder = nn.LSTMCell(embed_size, self.hidden_size)
+        self.h_projection = nn.Linear(2*self.hidden_size, self.hidden_size, bias=False)
+        self.c_projection = nn.Linear(2*self.hidden_size, self.hidden_size, bias=False)
+        self.att_projection = nn.Linear(2*self.hidden_size, 1, bias=False)      #maybe wrong
+        self.combined_output_projection = nn.Linear(3*self.hidden_size, self.hidden_size, bias=False)
+        self.target_vocab_projection = nn.Linear(   # maybe this is wrong
+            self.hidden_size, self.model_embeddings.target.weight.shape[0])
+        self.dropout = nn.Dropout(self.dropout_rate)
+
+
 
 
         ### END YOUR CODE
@@ -109,7 +125,7 @@ class NMT(nn.Module):
 
         # Zero out, probabilities for which we have nothing in the target text
         target_masks = (target_padded != self.vocab.tgt['<pad>']).float()
-        
+
         # Compute log probability of generating true target words
         target_gold_words_log_prob = torch.gather(P, index=target_padded[1:].unsqueeze(-1), dim=-1).squeeze(-1) * target_masks[1:]
         scores = target_gold_words_log_prob.sum(dim=0)
@@ -139,7 +155,7 @@ class NMT(nn.Module):
         ###     2. Compute `enc_hiddens`, `last_hidden`, `last_cell` by applying the encoder to `X`.
         ###         - Before you can apply the encoder, you need to apply the `pack_padded_sequence` function to X.
         ###         - After you apply the encoder, you need to apply the `pad_packed_sequence` function to enc_hiddens.
-        ###         - Note that the shape of the tensor returned by the encoder is (src_len b, h*2) and we want to
+        ###         - Note that the shape of the tensor returned by the encoder is (src_len, b, h*2) and we want to
         ###           return a tensor of shape (b, src_len, h*2) as `enc_hiddens`.
         ###     3. Compute `dec_init_state` = (init_decoder_hidden, init_decoder_cell):
         ###         - `init_decoder_hidden`:
@@ -163,6 +179,19 @@ class NMT(nn.Module):
         ###     Tensor Permute:
         ###         https://pytorch.org/docs/stable/tensors.html#torch.Tensor.permute
 
+        # I'm puzzled what's the real role does 'pack_padded_sequence' take?
+        # the doc of Pytorch even don't explain this in details
+        # and why We should apply 'pack_padded_sequence' to sents embedding matrix
+
+        X = self.model_embeddings.source(source_padded)
+        enc_hiddens, (last_hidden, last_cell) = self.decoder(
+            pack_padded_sequence(X, input=source_lengths))
+        enc_hiddens = pad_packed_sequence(enc_hiddens, batch_first=True)[0]
+        last_hidden = torch.cat((last_hidden[0, :], last_hidden[1, :]), 1)
+        init_decoder_hidden = self.h_projection(last_hidden)
+        last_cell = torch.cat((last_cell[0, :]), last_cell[1, :], 1)
+        init_decoder_cell = self.c_projection(last_cell)
+        dec_init_state = (init_decoder_hidden, init_decoder_cell)
 
         ### END YOUR CODE
 
@@ -207,7 +236,7 @@ class NMT(nn.Module):
         ###         where tgt_len = maximum target sentence length, b = batch size, e = embedding size.
         ###     3. Use the torch.split function to iterate over the time dimension of Y.
         ###         Within the loop, this will give you Y_t of shape (1, b, e) where b = batch size, e = embedding size.
-        ###             - Squeeze Y_t into a tensor of dimension (b, e). 
+        ###             - Squeeze Y_t into a tensor of dimension (b, e).
         ###             - Construct Ybar_t by concatenating Y_t with o_prev.
         ###             - Use the step function to compute the the Decoder's next (cell, state) values
         ###               as well as the new combined output o_t.
@@ -220,7 +249,7 @@ class NMT(nn.Module):
         ### Note:
         ###    - When using the squeeze() function make sure to specify the dimension you want to squeeze
         ###      over. Otherwise, you will remove the batch dimension accidentally, if batch_size = 1.
-        ###   
+        ###
         ### Use the following docs to implement this functionality:
         ###     Zeros Tensor:
         ###         https://pytorch.org/docs/stable/torch.html#torch.zeros
@@ -272,7 +301,7 @@ class NMT(nn.Module):
         ### TODO:
         ###     1. Apply the decoder to `Ybar_t` and `dec_state`to obtain the new dec_state.
         ###     2. Split dec_state into its two parts (dec_hidden, dec_cell)
-        ###     3. Compute the attention scores e_t, a Tensor shape (b, src_len). 
+        ###     3. Compute the attention scores e_t, a Tensor shape (b, src_len).
         ###        Note: b = batch_size, src_len = maximum source length, h = hidden size.
         ###
         ###       Hints:
