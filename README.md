@@ -4,7 +4,7 @@ Solutions for **CS224n, winter, 2019.**
 Welcome to discuss problems appearing in assigments, **please** submit to issue.    
 Also take notes for the key point in lectures.
 The solutions for assignment is written by **Markdown**.    
-&nbsp;
+    
 CS224n-win-2019练习答案。    
 问题请提交至issue，欢迎各位一起讨论。    
 需要书写的答案都是用**Markdown**写的，内容为全英文。    
@@ -44,6 +44,7 @@ CS224n-win-2019练习答案。
 - [x] note:&emsp;Machine Translation, Sequence-to-sequence and Attention
 - [ ] a4
 - [ ] Assignment4
+- [x] read:&emsp;Attention and Augmented Recurrent Neural Networks
 
 **key point for a4:**
 [How to understand pack_padded_sequence and pad_packed_sequence?(Chinese ed)](https://blog.csdn.net/lssc4205/article/details/79474735)    
