@@ -125,7 +125,7 @@ class NMT(nn.Module):
         ###     4. Compute log probability distribution over the target vocabulary using the
         ###        combined_outputs returned by the `self.decode()` function.
 
-        enc_hiddens, dec_init_state = self.encoder(source_padded, source_lengths)
+        enc_hiddens, dec_init_state = self.encode(source_padded, source_lengths)
         enc_masks = self.generate_sent_masks(enc_hiddens, source_lengths)
         combined_outputs = self.decode(enc_hiddens, enc_masks, dec_init_state, target_padded)
         P = F.log_softmax(self.target_vocab_projection(combined_outputs), dim=-1)
@@ -275,7 +275,6 @@ class NMT(nn.Module):
 
         for Y_t in torch.split(Y, 1):  #3
             Y_t = torch.squeeze(Y_t)
-            print(Y.shape, Y_t.shape, o_prev.shape)
             Ybar_t = torch.cat((Y_t, o_prev), 1)
             dec_state, o_t, e_t = self.step(
                 Ybar_t, dec_state, enc_hiddens, enc_hiddens_proj, enc_masks)
