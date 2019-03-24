@@ -5,11 +5,11 @@ Welcome to discuss problems appearing in assigments, **please** submit to issue.
 Also take notes for the key point in lectures.
 The solutions for assignment is written by **Markdown**.    
 &nbsp;
-CS224n-win-2019练习答案。
-问题请提交至issue，欢迎各位一起讨论。
-需要书写的答案都是用**Markdown**写的，内容为全英文。
-水平有限，望各位不吝指教。
-部分答案有缺失，紧急补课中···
+CS224n-win-2019练习答案。    
+问题请提交至issue，欢迎各位一起讨论。    
+需要书写的答案都是用**Markdown**写的，内容为全英文。    
+水平有限，望各位不吝指教。    
+部分答案有缺失，紧急补课中···    
 ***
 
 ## w1
