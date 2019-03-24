@@ -341,7 +341,9 @@ class NMT(nn.Module):
         ###         https://pytorch.org/docs/stable/torch.html#torch.squeeze
         dec_state = self.decoder(Ybar_t, dec_state)
         dec_hidden, dec_cell = dec_state
-        e_t = torch.squeeze(torch.bmm(enc_hiddens_proj, torch.unsqueeze(dec_hidden, 2)))
+        #print(dec_hidden.shape, enc_hiddens_proj.shape)
+        #exit()
+        e_t = torch.squeeze(torch.bmm(enc_hiddens_proj, torch.unsqueeze(dec_hidden, 2)), 2)
 
         ### END YOUR CODE
 
@@ -377,8 +379,8 @@ class NMT(nn.Module):
         ###     Tanh:
         ###         https://pytorch.org/docs/stable/torch.html#torch.tanh
 
-        alpha_t = F.softmax(e_t, dim=0)     # maybe wrong
-        a_t = torch.squeeze(torch.bmm(torch.unsqueeze(alpha_t, 1), enc_hiddens))
+        alpha_t = F.softmax(e_t, dim=1)     # maybe wrong
+        a_t = torch.squeeze(torch.bmm(torch.unsqueeze(alpha_t, 1), enc_hiddens), 1)
         U_t = torch.cat((a_t, dec_hidden), 1)
         V_t = self.combined_output_projection(U_t)
         O_t = self.dropout(torch.tanh(V_t))
