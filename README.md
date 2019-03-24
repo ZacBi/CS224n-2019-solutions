@@ -3,7 +3,7 @@
 Solutions for **CS224n, winter, 2019.**    
 Welcome to discuss problems appearing in assigments, **please** submit to issue.    
 Also take notes for the key point in lectures.
-The solutions for assignment is written by **Markdown**.
+The solutions for assignment is written by **Markdown**.    
 &nbsp;
 CS224n-win-2019练习答案。
 问题请提交至issue，欢迎各位一起讨论。
