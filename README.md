@@ -46,6 +46,6 @@ CS224n-win-2019练习答案。
 - [ ] Assignment4
 
 **key point for a4:**
-[How to understand pack_padded_sequence and pad_packed_sequence?(Chinese ed)](https://blog.csdn.net/lssc4205/article/details/79474735)
+[How to understand pack_padded_sequence and pad_packed_sequence?(Chinese ed)](https://blog.csdn.net/lssc4205/article/details/79474735)    
 [How to understand pack_padded_sequence and pad_packed_sequence?(English ed)](https://gist.github.com/HarshTrivedi/f4e7293e941b17d19058f6fb90ab0fec)
 
