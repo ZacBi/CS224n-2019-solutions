@@ -3,5 +3,6 @@
     "python.pythonPath": "D:\\ProgramData\\Anaconda3\\envs\\cs224n\\python.exe",
     "python.linting.enabled": true,
     "python.linting.pep8Enabled": false,
-    "python.linting.banditEnabled": true
+    "python.linting.banditEnabled": false,
+    "python.linting.flake8Enabled": true
 }
