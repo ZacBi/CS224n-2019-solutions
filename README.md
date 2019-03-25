@@ -3,8 +3,11 @@
 Solutions for **CS224n, winter, 2019.**    
 Welcome to discuss problems appearing in assigments, **please** submit to issue.    
 Also take notes for the key point in lectures.
-The solutions for assignment is written by **Markdown**.    
-    
+The solutions for assignment is written by **Markdown**.
+&nbsp;
+- Course page: https://web.stanford.edu/class/cs224n
+- Video page: https://www.youtube.com/watch?v=8rXD5-xhemo&list=PLoROMvodv4rOhcuXMZkNm7j3fVwBBY42z
+
 <!-- CS224n-win-2019练习答案。    
 问题请提交至issue，欢迎各位一起讨论。    
 需要书写的答案都是用**Markdown**写的，内容为全英文。    
