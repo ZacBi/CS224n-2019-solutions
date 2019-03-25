@@ -42,11 +42,12 @@ The solutions for assignment is written by **Markdown**.
 ## **w4**
 
 - [x] note:&emsp;Machine Translation, Sequence-to-sequence and Attention
-- [ ] a4
+- [x] a4
 - [ ] Assignment4
 - [x] read:&emsp;Attention and Augmented Recurrent Neural Networks
 
 **key point for a4:**
-[How to understand pack_padded_sequence and pad_packed_sequence?(Chinese ed)](https://blog.csdn.net/lssc4205/article/details/79474735)    
-[How to understand pack_padded_sequence and pad_packed_sequence?(English ed)](https://gist.github.com/HarshTrivedi/f4e7293e941b17d19058f6fb90ab0fec)
+How to understand pack_padded_sequence and pad_packed_sequence?    
+[(Chinese ed)](https://blog.csdn.net/lssc4205/article/details/79474735)    
+[(English ed)](https://gist.github.com/HarshTrivedi/f4e7293e941b17d19058f6fb90ab0fec)
 
