@@ -7,16 +7,18 @@ nmt_model.py: NMT Model
 Pencheng Yin <pcyin@cs.cmu.edu>
 Sahil Chopra <schopra8@stanford.edu>
 """
-from collections import namedtuple
 import sys
-from typing import List, Tuple, Dict, Set, Union
+from collections import namedtuple
+from typing import Dict, List, Set, Tuple, Union
+
 import torch
 import torch.nn as nn
-import torch.nn.utils
 import torch.nn.functional as F
-from torch.nn.utils.rnn import pad_packed_sequence, pack_padded_sequence
+import torch.nn.utils
+from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 
 from model_embeddings import ModelEmbeddings
+
 Hypothesis = namedtuple('Hypothesis', ['value', 'score'])
 
 

@@ -26,3 +26,53 @@ $\mathrm{v.}$ speciﬁc model limitations(the model may pay more attetion to the
 $\mathrm{vi.}$ speciﬁc model limitations(the model can't distinguish the difference between French unit and American unit)
 
 ### (b)
+
+### (c)
+$\mathrm{i.}$ For $\mathbf{c}_1$:
+$
+p_1 = 0.6 \\
+p_2 = 0.75 \\
+r^* = 4 \\
+BP = 1 (c_1 > r^*) \\
+BLEU = 0.67 \\
+$
+for $\mathbf{c}_2$:
+$
+p_1 = 1 \\
+p_2 = 0.5 \\
+r^* = 4 \\
+BP = 1 (c_1 > r^*) \\
+BLEU = 0.70
+$
+
+So $\mathbf{c}_2$ get higher BLEU score. I agree with it.
+
+$\mathrm{ii.}$ For $\mathbf{c}_1$:
+$
+p_1 = 0.6 \\
+p_2 = 0.4 \\
+r^* = 6 \\
+BP = exp(-0.2) \\
+BLEU = 0.401 \\
+$
+for $\mathbf{c}_2$:
+$
+p_1 = 0.4 \\
+p_2 = 0.2 \\
+r^* = 4 \\
+BP = epx(-0.2) \\
+BLEU = 0.23
+$
+
+So $\mathbf{c}_1$ get higher BLEU score. In reality, $\mathbf{c}_2$ is a better translation.
+
+$\mathrm{iii.}$ We can get the reason from the question above. A single reference translation make our candidate sentence particular, somehow, it's overfitting.
+
+$\mathrm{iv.}$
+Advantages:
+- It's convenient and fast, a good substitue of human evaluation.
+- In the corpus level, the score of BLEU is close to human's score.
+  
+Disadvantages:
+- It only works well on the corpus level because any zeros in precision scores will zero the entire BLEU score.
+- BLEU score as presented suffers for only comparing a candidate translation against a single reference, which is surely a noisy representation of the relevant n-grams that need to be matched.
