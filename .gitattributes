@@ -1,3 +1,4 @@
+* linguist-vendored
 *.py linguist-language=python
 *.md linguist-language=markdown
 *.ipynb linguist-language=jupyter_notebook
