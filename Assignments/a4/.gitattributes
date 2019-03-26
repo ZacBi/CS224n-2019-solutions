@@ -1,7 +1,0 @@
-model.bin filter=lfs diff=lfs merge=lfs -text
- filter=lfs diff=lfs merge=lfs -text
-model.bin.optim filter=lfs diff=lfs merge=lfs -text
-
-*.py linguist-language=python
-*.md linguist-language=markdown
-*.ipynb linguist-language=jupyter notebook
