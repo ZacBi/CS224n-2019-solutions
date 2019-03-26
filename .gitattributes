@@ -1,6 +1,7 @@
 *.py linguist-language=python
-*.md linguist-language=Markdown
-*.ipynb linguist-language=Jupyter notebook
+*.md linguist-language=markdown
+*.ipynb linguist-language=jupyter notebook
+
 Assignment4/a4/model.bin filter=lfs diff=lfs merge=lfs -text
 Assignment4/a4/model.bin.optim filter=lfs diff=lfs merge=lfs -text
 
