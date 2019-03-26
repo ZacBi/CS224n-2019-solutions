@@ -1,5 +1,5 @@
-*.js linguist-vendored
-# *.py linguist-vendored=false
+* linguist-vendored
+*.py linguist-vendored=false
 *.py linguist-language=python
 *.md linguist-language=markdown
 *.ipynb linguist-language=jupyter_notebook
