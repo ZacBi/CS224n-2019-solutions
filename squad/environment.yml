@@ -1,0 +1,19 @@
+name: squad
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.6
+  - ujson
+  - numpy
+  - pip
+  - spacy=2.0.16
+  - tensorboard
+  - tensorflow
+  - tensorboardX
+  - tqdm
+  - urllib3
+  - pytorch=1.0.0
+  - pip:
+    - torch==1.0.0
