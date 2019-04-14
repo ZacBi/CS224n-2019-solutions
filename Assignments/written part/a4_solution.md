@@ -65,7 +65,7 @@ BLEU = 0.23
 $
 
 So $\mathbf{c}_1$ get higher BLEU score. In reality, $\mathbf{c}_2$ is a better translation.
-
+    
 $\mathrm{iii.}$ We can get the reason from the question above. A single reference translation make our candidate sentence particular, somehow, it's overfitting.
 
 $\mathrm{iv.}$
