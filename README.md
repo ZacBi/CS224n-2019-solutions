@@ -57,3 +57,20 @@ How to understand pack_padded_sequence and pad_packed_sequence?
 [(Chinese ed)](https://blog.csdn.net/lssc4205/article/details/79474735)    
 [(English ed)](https://gist.github.com/HarshTrivedi/f4e7293e941b17d19058f6fb90ab0fec)
 
+## Final project
+
+**reading**:
+
+- [x] final-project-practical-tips
+- [ ] default-final-project-handout
+- [ ] project-proposal-instructions
+- [ ] project-milestone-instructions
+- [ ] Practical Methodology_Deep Learning book chapter
+- [ ] Highway Networks
+- [ ] Zero-Shot Relation Extraction via Reading Comprehension
+- [ ] Bidirectional Attention Flow for Machine Comprehension
+
+**practice**:
+
+- [x] anotate codes
+- [x] train baseline
