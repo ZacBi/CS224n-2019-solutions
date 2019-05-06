@@ -7,9 +7,6 @@ sanity_check.py: sanity checks for assignment 5
 Usage:
     sanity_check.py 1e
     sanity_check.py 1f
-    sanity_check.py 1g
-    sanity_check.py 1h
-    sanity_check.py 1i
     sanity_check.py 1j
     sanity_check.py 2a
     sanity_check.py 2b
@@ -32,8 +29,6 @@ from vocab import Vocab, VocabEntry
 
 from char_decoder import CharDecoder
 from nmt_model import NMT
-from highway import Highway
-from cnn import CNN
 
 
 import torch
@@ -72,13 +67,6 @@ def question_1e_sanity_check():
     assert(small_ind == small_ind_gold), \
         "small test resulted in indices list {:}, expected {:}".format(small_ind, small_ind_gold)
 
-    print('Running test on single sentence')
-    sentence = ["right", "arcs", "only"]
-    single_ind = vocab.words2charindices(sentence)
-    single_ind_gold = [[[1, 47, 2], [1, 38, 2], [1, 36, 2], [1, 37, 2], [1, 49, 2]], [[1, 30, 2], [1, 47, 2], [1, 32, 2], [1, 48, 2]], [[1, 44, 2], [1, 43, 2], [1, 41, 2], [1, 54, 2]]]
-    assert(single_ind == single_ind_gold), \
-        "single sentence test resulted in indices list {:}, expected {:}".format(single_ind, single_ind_gold)
-
     print('Running test on large list of sentences')
     tgt_sents = [['<s>', "Let's", 'start', 'by', 'thinking', 'about', 'the', 'member', 'countries', 'of', 'the', 'OECD,', 'or', 'the', 'Organization', 'of', 'Economic', 'Cooperation', 'and', 'Development.', '</s>'], ['<s>', 'In', 'the', 'case', 'of', 'gun', 'control,', 'we', 'really', 'underestimated', 'our', 'opponents.', '</s>'], ['<s>', 'Let', 'me', 'share', 'with', 'those', 'of', 'you', 'here', 'in', 'the', 'first', 'row.', '</s>'], ['<s>', 'It', 'suggests', 'that', 'we', 'care', 'about', 'the', 'fight,', 'about', 'the', 'challenge.', '</s>'], ['<s>', 'A', 'lot', 'of', 'numbers', 'there.', 'A', 'lot', 'of', 'numbers.', '</s>']]
     tgt_ind = vocab.words2charindices(tgt_sents)
@@ -87,104 +75,6 @@ def question_1e_sanity_check():
 
     print("All Sanity Checks Passed for Question 1e: words2charindices()!")
     print ("-"*80)
-
-
-
-def question_1i_sanity_check(model):
-    """ Sanity check for highway network 
-    """
-    print ("-"*80)
-    print("Running Sanity Check for Question 1i: Padding")
-    print ("-"*80)
-    vocab = VocabEntry()
-
-    print("Running test on a list of sentences")
-    sentences = [['Human:', 'What', 'do', 'we', 'want?'], ['Computer:', 'Natural', 'language', 'processing!'], ['Human:', 'When', 'do', 'we', 'want', 'it?'], ['Computer:', 'When', 'do', 'we', 'want', 'what?']]
-    word_ids = vocab.words2charindices(sentences)
-
-    #padded_sentences = pad_sents_char(word_ids, 0)
-    padded_sentences = vocab.to_input_tensor_char(sentences,model.device)
-    gold_padded_sentences = torch.load('./sanity_check_en_es_data/gold_padded_sentences.pkl')
-
-    #Test with batch size 4
-    x = torch.rand(4,1,21)
-    e_word = 19
-    k=2
-    max_word_len = 21
-    cnn = CNN(1,e_word,k)#,max_word_len)
-    cnn.forward(x)
-    #Test with batch size 4
-
-    #print(a.size())
-    #print(padded_sentences.size())
-    #assert padded_sentences.size() == a.size(), "to_input_tensor size incorrect! is incorrect: it should be:\n {} but is:\n{}".format(a.size(), padded_sentences.size())
-
-    print("Sanity Check Passed for Question 1i: Padding!")
-    print("-"*80)
-
-
-
-
-
-def question_1h_sanity_check(model):
-    """ Sanity check for highway network 
-    """
-    print ("-"*80)
-    print("Running Sanity Check for Question 1h: Padding")
-    print ("-"*80)
-    vocab = VocabEntry()
-
-    print("Running test on a list of sentences")
-    sentences = [['Human:', 'What', 'do', 'we', 'want?'], ['Computer:', 'Natural', 'language', 'processing!'], ['Human:', 'When', 'do', 'we', 'want', 'it?'], ['Computer:', 'When', 'do', 'we', 'want', 'what?']]
-    word_ids = vocab.words2charindices(sentences)
-
-    #padded_sentences = pad_sents_char(word_ids, 0)
-    padded_sentences = vocab.to_input_tensor_char(sentences,model.device)
-    gold_padded_sentences = torch.load('./sanity_check_en_es_data/gold_padded_sentences.pkl')
-
-    #Test with batch size 1
-    x = torch.rand(1,1,21)
-    hw = Highway(21,21,21,0.5)
-    hw.forward(x)
-    #Test with batch size 4
-
-
-    print(a.size())
-    print(padded_sentences.size())
-    #assert padded_sentences.size() == a.size(), "to_input_tensor size incorrect! is incorrect: it should be:\n {} but is:\n{}".format(a.size(), padded_sentences.size())
-
-    print("Sanity Check Passed for Question 1h: Padding!")
-    print("-"*80)
-
-
-
-
-def question_1g_sanity_check(model):
-    """ Sanity check for pad_sents_char() function. 
-    """
-    print ("-"*80)
-    print("Running Sanity Check for Question 1g: Padding")
-    print ("-"*80)
-    vocab = VocabEntry()
-
-    print("Running test on a list of sentences")
-    sentences = [['Human:', 'What', 'do', 'we', 'want?'], ['Computer:', 'Natural', 'language', 'processing!'], ['Human:', 'When', 'do', 'we', 'want', 'it?'], ['Computer:', 'When', 'do', 'we', 'want', 'what?']]
-    word_ids = vocab.words2charindices(sentences)
-
-    #padded_sentences = pad_sents_char(word_ids, 0)
-    padded_sentences = vocab.to_input_tensor_char(sentences,model.device)
-    gold_padded_sentences = torch.load('./sanity_check_en_es_data/gold_padded_sentences.pkl')
-
-    a = torch.rand(6,4,21)
-    print(a.size())
-    print(padded_sentences.size())
-    assert padded_sentences.size() == a.size(), "to_input_tensor size incorrect! is incorrect: it should be:\n {} but is:\n{}".format(a.size(), padded_sentences.size())
-
-    print("Sanity Check Passed for Question 1g: Padding!")
-    print("-"*80)
-
-
-
 
 def question_1f_sanity_check():
     """ Sanity check for pad_sents_char() function. 
@@ -323,18 +213,6 @@ def main():
         question_1e_sanity_check()
     elif args['1f']:
         question_1f_sanity_check()
-
-    elif args['1g']:
-        question_1g_sanity_check(model)
-
-
-    elif args['1h']:
-        question_1h_sanity_check(model)
-
-    elif args['1i']:
-        question_1i_sanity_check(model)
-
-
     elif args['1j']:
         question_1j_sanity_check(model)
     elif args['2a']:

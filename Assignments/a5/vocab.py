@@ -115,9 +115,8 @@ class VocabEntry(object):
             return self[word]
 
     def words2charindices(self, sents):
-        """ Convert list of words OR list of sentences of words into
-        list of list of list of character indices.
-        @param sents (list[str] or list[list[str]]): sentence(s) in words
+        """ Convert list of sentences of words into list of list of list of character indices.
+        @param sents (list[list[str]]): sentence(s) in words
         @return word_ids (list[list[list[int]]]): sentence(s) in indices
         """
         ### YOUR CODE HERE for part 1e
@@ -128,15 +127,13 @@ class VocabEntry(object):
         ###
         ###     You must prepend each word with the `start_of_word` character and append 
         ###     with the `end_of_word` character. 
-        word_ids = [[[ self.char2id[x] for x in w] for w in s] for s in sents] 
-        word_ids = [[ [self.start_of_word] + w + [self.end_of_word] for w in s] for s in word_ids]
-        return word_ids
+
+
         ### END YOUR CODE
 
     def words2indices(self, sents):
-        """ Convert list of words or list of sentences of words
-        into list of list of indices.
-        @param sents (list[str] or list[list[str]]): sentence(s) in words
+        """ Convert list of sentences of words into list of list of indices.
+        @param sents (list[list[str]]): sentence(s) in words
         @return word_ids (list[list[int]]): sentence(s) in indices
         """
         return [[self[w] for w in s] for s in sents]
@@ -161,18 +158,8 @@ class VocabEntry(object):
         ### TODO: 
         ###     Connect `words2charindices()` and `pad_sents_char()` which you've defined in 
         ###     previous parts
+        
 
-        sents_tmp = self.words2charindices(sents)
-        sents_tmp_padded = pad_sents_char(sents_tmp,self.char2id['<pad>'])       
-        #print(sents_tmp_padded)
-        #print(len(sents_tmp_padded))
-        #sents_var = torch.as_tensor(data=sents_tmp_padded,dtype=torch.int64,device=device)
-        sents_var = torch.tensor(sents_tmp_padded,dtype=torch.long,device=device).contiguous()
-        #print(sents_var.size())
-        sents_var = sents_var.permute(1,0,2).contiguous()
-        #print('size of data - sents_var is',sents_var.size())
-        #print(sents_var.size())
-        return sents_var
         ### END YOUR CODE
 
     def to_input_tensor(self, sents: List[List[str]], device: torch.device) -> torch.Tensor:

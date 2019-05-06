@@ -17,8 +17,8 @@ import torch.nn as nn
 #   `Highway` in the file `highway.py`
 # Uncomment the following two imports once you're ready to run part 1(j)
 
-from cnn import CNN
-from highway import Highway
+# from cnn import CNN
+# from highway import Highway
 
 # End "do not change" 
 
@@ -40,13 +40,8 @@ class ModelEmbeddings(nn.Module):
         ## End A4 code
 
         ### YOUR CODE HERE for part 1j
-        pad_token_idx = vocab.char2id['<pad>']
-        e_char = 50
-        self.embeddings = nn.Embedding(len(vocab.char2id),e_char,padding_idx=pad_token_idx)
-        self.embed_size = embed_size
-        self.cnn = CNN(in_ch=e_char, out_ch=embed_size,k=5)
-        self.highway = Highway(D_in=embed_size, H=embed_size, D_out=embed_size,prob=0.3) 
-        self.dropout=nn.Dropout(0.3)
+
+
         ### END YOUR CODE
 
     def forward(self, input):
@@ -64,35 +59,7 @@ class ModelEmbeddings(nn.Module):
         ## End A4 code
 
         ### YOUR CODE HERE for part 1j
-        #Map input (x_padded) to output (x_word_embed)
-        #print('shape of input is',input.size())
-        #print('*** input is',input)
-       
-        x_embed = self.embeddings(input)
 
-        #x_embed = F.embedding(input,self.embeddings)
-        #print('shape of x_embed is,',x_embed.size())
-        #x_reshaped = x_embed.permute(1,0,3,2) #batch_size,sentence_length,max_word_len,chat_embed_size
-        #print('shape of x_reshape is,',x_reshaped.size())
-        x_reshaped_list = list(x_embed.size())
-        #print(x_reshaped_list)
-        x_reshaped_red = x_embed.reshape(-1,x_reshaped_list[3],x_reshaped_list[2])
-        #print('shape of x_reshape_red is,',x_reshaped_red.size())
-        x_cov_out = self.cnn(x_reshaped_red)
-        #print('shape of x_cov_out is,',x_cov_out.size())
-        #x_cov_out = x_cov_out.squeeze(2)
 
-        #print('shape of x_cov_out is,',x_cov_out.size())
-
-        x_cov_out = x_cov_out.reshape(x_reshaped_list[0],x_reshaped_list[1],-1)
-
-        #print('to highway: shape of x_cov_out is,',x_cov_out.size())
-        x_word_embed = self.highway(x_cov_out)
-        #print('in:shape of x_word_embed is,',x_word_embed.size())
-        x_word_embed = self.dropout(x_word_embed)
-        #x_word_embed = x_word_embed.reshape(x_reshaped_list[1],x_reshaped_list[0],-1)
-
-        #print('out:size of x_word_embed',x_word_embed.size())
-        return x_word_embed       
         ### END YOUR CODE
 
