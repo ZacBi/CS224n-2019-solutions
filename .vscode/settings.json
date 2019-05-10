@@ -1,9 +1,9 @@
 {
-    "python.linting.pylintEnabled": false,
-    "python.pythonPath": "D:\\ProgramData\\Anaconda3\\envs\\cs224n\\python.exe",
+    "python.linting.pylintEnabled": true,
+    "python.pythonPath": "D:\\ProgramData\\Anaconda3\\envs\\DLpytorch\\python.exe",
     "python.linting.enabled": true,
     "python.linting.pep8Enabled": false,
     "python.linting.banditEnabled": false,
     "python.linting.flake8Enabled": false,
-    "python.linting.pylamaEnabled": true
+    "python.linting.pylamaEnabled": false
 }

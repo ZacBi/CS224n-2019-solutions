@@ -80,9 +80,6 @@ class ParserModel(nn.Module):
         nn.init.xavier_uniform_(self.hidden_to_logits.weight)
 
 
-
-
-
         ### END YOUR CODE
 
     def embedding_lookup(self, t):

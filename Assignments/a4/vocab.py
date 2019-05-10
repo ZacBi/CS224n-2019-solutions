@@ -127,6 +127,7 @@ class VocabEntry(object):
         word_ids = self.words2indices(sents)
         sents_t = pad_sents(word_ids, self['<pad>'])
         sents_var = torch.tensor(sents_t, dtype=torch.long, device=device)
+        # Q: what is torch.t?
         return torch.t(sents_var)
 
     @staticmethod
