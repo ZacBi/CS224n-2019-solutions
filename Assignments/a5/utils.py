@@ -27,7 +27,7 @@ def pad_sents_char(sents, char_pad_token):
         number of characters
         Output shape: (batch_size, max_sentence_length, max_word_length)
     """
-    # Words longer than 21 characters should be truncated
+    # Words longer than 21 should be truncated
     # Q: how truncate, why truncate, is that reasonable?
     max_word_length = 21
 
@@ -41,8 +41,20 @@ def pad_sents_char(sents, char_pad_token):
     ###
     ###     You should NOT use the method `pad_sents()` below because of the way it handles
     ###     padding and unknown words.
-    
+    max_sent_length = max(len(sent) for sent in sents)
+    word_padded = [char_pad_token] * max_word_length
+    sents_padded = []
 
+    for sent in sents:
+        words_padded = []
+        for word in sent:
+            if len(word) > max_word_length:
+                words_padded.append(word[:max_word_length])
+            else:
+                words_padded.append(word + [char_pad_token] *
+                                    (max_word_length - len(word)))
+        sents_padded.append(words_padded + [word_padded] *
+                            (max_sent_length - len(words_padded)))
     ### END YOUR CODE
 
     return sents_padded

@@ -147,7 +147,8 @@ class VocabEntry(object):
         @return word_ids (list[list[int]]): sentence(s) in indices
         """
         # the usage of self[w] refer to self.__getitem__ method
-        return [[self[w] for w in s] for s in sents]
+        word_ids = [[self[w] for w in s] for s in sents]
+        return word_ids
 
     def indices2words(self, word_ids):
         """ Convert list of indices into words.
@@ -170,7 +171,10 @@ class VocabEntry(object):
         ### TODO:
         ###     Connect `words2charindices()` and `pad_sents_char()` which you've defined in
         ###     previous parts
-
+        word_ids = self.words2charindices(sents)
+        sents_padded = pad_sents_char(word_ids)
+        sents_var = torch.tensor(sents_padded, dtype=torch.long, device=device)
+        return torch.transpose(sents_var, 0, 1)
         ### END YOUR CODE
 
     def to_input_tensor(self, sents: List[List[str]],
