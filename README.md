@@ -103,8 +103,8 @@ It has been long time for no updating...
 - [x] default-final-project-handout
 - [x] project-proposal-instructions
 - [ ] Practical Methodology_Deep Learning book chapter
-- [ ] Highway Networks
-- [ ] Bidirectional Attention Flow for Machine Comprehension
+- [x] Highway Networks
+- [x] Bidirectional Attention Flow for Machine Comprehension
 
 **practice**:
 

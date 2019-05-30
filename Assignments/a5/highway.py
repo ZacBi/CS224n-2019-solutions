@@ -35,7 +35,7 @@ class Highway(nn.Module):
         """
 
         X_projection = F.relu(self.projection(X_conv_out))
-        X_gate = F.sigmoid(self.gate(X_conv_out))
+        X_gate = torch.sigmoid(self.gate(X_conv_out))
         X_highway = torch.mul(X_projection, X_gate) + torch.mul(
             X_conv_out, 1 - X_gate)
 

@@ -130,7 +130,7 @@ def question_1f_sanity_check():
     print("-" * 80)
 
 
-def question_1h_sanity_check(model):
+def question_1h_sanity_check():
     """ Sanity check for highway.py
         basic shape check
     """
@@ -139,14 +139,15 @@ def question_1h_sanity_check(model):
     print("Running Sanity Check for Question 1h: Highway")
     print("-" * 80)
 
-    X_conv_out = torch.randint(1, 5, (5, 4, 3))
+    X_conv_out = torch.randn((5, 4, 3))
     highway = Highway(X_conv_out.size(-1))
     X_highway = highway(X_conv_out)
     assert X_conv_out.size() == X_highway.size(
     ), "Output size should be: {}\n but is {}\n".format(X_conv_out.size(), X_highway.size())
 
-    print("Sanity Check Passed for Question 1h: Highway!")
+    print("Shape is right!")
     print("-" * 80)
+    
 
 
 def question_1j_sanity_check(model):
@@ -315,7 +316,7 @@ def main():
     elif args['1f']:
         question_1f_sanity_check()
     elif args['1h']:
-        question_1h_sanity_check(model)
+        question_1h_sanity_check()
     elif args['1j']:
         question_1j_sanity_check(model)
     elif args['2a']:
