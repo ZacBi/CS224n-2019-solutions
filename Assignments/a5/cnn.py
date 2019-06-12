@@ -18,6 +18,8 @@ class CNN(nn.Module):
         @param f: number of filters, should be embed_size fo application
         """
 
+        # Conv1d: https://pytorch.org/docs/stable/nn.html?highlight=conv1d#torch.nn.functional.conv1d
+        # MaxPool1d
         super(CNN, self).__init__()
         if not f:
             f = embed_size
