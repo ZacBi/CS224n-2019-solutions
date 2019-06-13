@@ -1,0 +1,5 @@
+{
+    "python.pythonPath": "D:\\ProgramData\\Anaconda3\\envs\\torch\\python.exe",
+    "python.linting.pep8Enabled": true,
+    "python.linting.enabled": true
+}
