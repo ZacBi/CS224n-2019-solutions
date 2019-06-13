@@ -33,7 +33,7 @@ class VocabEntry(object):
 
     def __init__(self, word2id=None):
         """ Init VocabEntry Instance.
-        @param word2id (dict): dictionary mapping words 2 indices
+        @param word2id (dict): dictionary mapping words 2(to) indices
         """
         if word2id:
             self.word2id = word2id

@@ -17,8 +17,8 @@ import torch.nn as nn
 #   `Highway` in the file `highway.py`
 # Uncomment the following two imports once you're ready to run part 1(j)
 
-# from cnn import CNN
-# from highway import Highway
+from cnn import CNN
+from highway import Highway
 
 # End "do not change" 
 
@@ -40,7 +40,17 @@ class ModelEmbeddings(nn.Module):
         ## End A4 code
 
         ### YOUR CODE HERE for part 1j
-
+        
+        # there is two problems 
+        # 1. Now that embed_size is for output, 
+        # so why A4 code take embed_size as param for self.embeddings? 
+        # remember we take e_{char} = 50
+        # 2. VocabEntry object doesn't own the attribute 'src'
+        self.embed_size_char = 50
+        self.embeddings = nn.Embedding(len(vocab))
+        self.convNN = CNN()
+        self.highway = Highway()
+        self.dropout = nn.Dropout(p=0.3)
 
         ### END YOUR CODE
 
