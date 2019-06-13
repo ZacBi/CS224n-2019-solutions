@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
 """
 CS224N 2018-19: Homework 5
 """
@@ -17,6 +16,7 @@ class Highway(nn.Module):
         - Sigmoid
         - gating mechanism from LSTM
     """
+
     def __init__(self, embed_size):
         """ Init Higway network
 
@@ -41,5 +41,6 @@ class Highway(nn.Module):
             X_conv_out, 1 - X_gate)
 
         return X_highway
+
 
 ### END YOUR CODE

@@ -5,12 +5,17 @@ CS224N 2018-19: Homework 5
 """
 
 ### YOUR CODE HERE for part 1i
+import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
 
 class CNN(nn.Module):
-    def __init__(self, embed_size: int, m_word: int, k: int = 5, f: int = None):
+    def __init__(self,
+                 embed_size: int = 50,
+                 m_word: int = 21,
+                 k: int = 5,
+                 f: int = None):
         """ 
         Init CNN which is a 1-D cnn.
 
@@ -30,7 +35,7 @@ class CNN(nn.Module):
 
     def forward(self, X_reshaped: torch.Tensor) -> torch.Tensor:
         """
-        map from X_reshaped tp X_conv_out
+        map from X_reshaped to X_conv_out
 
         @param X_reshaped (Tensor): Tensor of char-level embedding with shape (max_sentence_length, 
                                     batch_size, e_char, m_word), where e_char = embed_size of char, 
@@ -38,10 +43,10 @@ class CNN(nn.Module):
         @return X_conv_out (Tensor): Tensor of word-level embedding with shape (max_sentence_length,
                                     batch_size)
         """
-        
+
         X_conv = self.conv1d(X_reshaped)
         X_conv_out = self.maxpool(F.relu(X_conv))
 
-        return X_conv_out
+        return torch.squeeze(X_conv_out)
 
 ### END YOUR CODE
