@@ -1,9 +1,0 @@
-{
-<<<<<<< HEAD
-    "python.pythonPath": "D:\\ProgramData\\Anaconda3\\envs\\torch\\python.exe",
-    "python.linting.pep8Enabled": true,
-    "python.linting.enabled": true
-=======
-    "python.pythonPath": "D:\\ProgramData\\Anaconda3\\envs\\DLpytorch\\python.exe"
->>>>>>> 7c608fbbc5620f2a40a5c405952a09937db25d55
-}
