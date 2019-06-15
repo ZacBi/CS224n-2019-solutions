@@ -56,7 +56,9 @@ class VocabEntry(object):
         self.char2id['{'] = 1
         self.char2id['}'] = 2
         self.char2id['<unk>'] = 3
-        for i, c in enumerate(self.char_list):  # the enumerate func turn a itrateble object to a indexed sequence
+        for i, c in enumerate(
+                self.char_list
+        ):  # the enumerate func turn a itrateble object to a indexed sequence
             self.char2id[c] = len(self.char2id)
         self.char_unk = self.char2id['<unk>']
         self.start_of_word = self.char2id["{"]
@@ -133,11 +135,8 @@ class VocabEntry(object):
         ###     You must prepend each word with the `start_of_word` character and append
         ###     with the `end_of_word` character.
 
-        return [
-            [[self.char2id['{']] + [self.char2id[char]
-                                    for char in word] + [self.char2id['}']]
-             for word in sent] for sent in sents
-        ]
+        return [[[self.char2id['{']] + [self.char2id[char] for char in word] +
+                 [self.char2id['}']] for word in sent] for sent in sents]
 
         ### END YOUR CODE
 
@@ -171,10 +170,15 @@ class VocabEntry(object):
         ### TODO:
         ###     Connect `words2charindices()` and `pad_sents_char()` which you've defined in
         ###     previous parts
+
         word_ids = self.words2charindices(sents)
-        sents_padded = pad_sents_char(word_ids)
-        sents_var = torch.tensor(sents_padded, dtype=torch.long, device=device)
+        sents_padded_chars = pad_sents_char(
+            word_ids, char_pad_token=self.char2id['<pad>'])
+        sents_var = torch.tensor(sents_padded_chars,
+                                 dtype=torch.long,
+                                 device=device)
         return torch.transpose(sents_var, 0, 1)
+
         ### END YOUR CODE
 
     def to_input_tensor(self, sents: List[List[str]],
@@ -206,8 +210,9 @@ class VocabEntry(object):
         print(
             'number of word types: {}, number of word types w/ frequency >= {}: {}'
             .format(len(word_freq), freq_cutoff, len(valid_words)))
-        top_k_words = sorted(
-            valid_words, key=lambda w: word_freq[w], reverse=True)[:size]
+        top_k_words = sorted(valid_words,
+                             key=lambda w: word_freq[w],
+                             reverse=True)[:size]
         for word in top_k_words:
             vocab_entry.add(word)
         return vocab_entry
@@ -247,10 +252,10 @@ class Vocab(object):
         """ Save Vocab to file as JSON dump.
         @param file_path (str): file path to vocab file
         """
-        json.dump(
-            dict(src_word2id=self.src.word2id, tgt_word2id=self.tgt.word2id),
-            open(file_path, 'w'),
-            indent=2)
+        json.dump(dict(src_word2id=self.src.word2id,
+                       tgt_word2id=self.tgt.word2id),
+                  open(file_path, 'w'),
+                  indent=2)
 
     @staticmethod
     def load(file_path):
@@ -268,8 +273,8 @@ class Vocab(object):
         """ Representation of Vocab to be used
         when printing the object.
         """
-        return 'Vocab(source %d words, target %d words)' % (len(self.src),
-                                                            len(self.tgt))
+        return 'Vocab(source %d words, target %d words)' % (len(
+            self.src), len(self.tgt))
 
 
 if __name__ == '__main__':
@@ -283,8 +288,8 @@ if __name__ == '__main__':
 
     vocab = Vocab.build(src_sents, tgt_sents, int(args['--size']),
                         int(args['--freq-cutoff']))
-    print('generated vocabulary, source %d words, target %d words' % (len(
-        vocab.src), len(vocab.tgt)))
+    print('generated vocabulary, source %d words, target %d words' %
+          (len(vocab.src), len(vocab.tgt)))
 
     vocab.save(args['VOCAB_FILE'])
     print('vocabulary saved to %s' % args['VOCAB_FILE'])

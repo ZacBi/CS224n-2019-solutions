@@ -51,17 +51,18 @@ class ModelEmbeddings(nn.Module):
 
 
         pad_token_idx = vocab.char2id['<pad>']
-        embed_size_char = 50
+        self.embed_size = embed_size
+        char_embed_size = 50
         self.char_embedding = nn.Embedding(len(vocab.char2id),
-                                           embed_size_char,
-                                           padding_idx=pad_token_idx)
-        self.convNN = CNN(f=embed_size)
-        self.highway = Highway(embed_size=embed_size)
+                                           char_embed_size,
+                                           pad_token_idx)
+        self.convNN = CNN(f=self.embed_size)
+        self.highway = Highway(embed_size=self.embed_size)
         self.dropout = nn.Dropout(p=0.3)
 
         ### END YOUR CODE
 
-    def forward(self, input):
+    def forward(self, input: torch.Tensor) -> torch.Tensor:
         """
         Looks up character-based CNN embeddings for the words in a batch of sentences.
         @param input: Tensor of integers of shape (sentence_length, batch_size, max_word_length) where
@@ -76,20 +77,21 @@ class ModelEmbeddings(nn.Module):
         ## End A4 code
 
         ### YOUR CODE HERE for part 1j
-
+        
         X_word_emb_list = []
         # divide input into sentence_length batchs
         for X_padded in input:
             X_emb = self.char_embedding(X_padded)
             X_reshaped = torch.transpose(X_emb, dim0=-1, dim1=-2)
             # conv1d can only take 3-dim mat as input
-            # so it needs to concat/stack all the embeddings of word 
+            # so it needs to concat/stack all the embeddings of word
             # after going through the network
-            X_conv_out = self.convNN.forward(X_reshaped)
-            X_highway = self.highway.forward(X_conv_out)
+            X_conv_out = self.convNN(X_reshaped)
+            X_highway = self.highway(X_conv_out)
             X_word_emb = self.dropout(X_highway)
             X_word_emb_list.append(X_word_emb)
 
-        return torch.stack(X_word_emb_list)
+        X_word_emb = torch.stack(X_word_emb_list)
+        return X_word_emb
 
         ### END YOUR CODE

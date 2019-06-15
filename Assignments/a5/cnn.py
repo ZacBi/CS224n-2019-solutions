@@ -47,6 +47,6 @@ class CNN(nn.Module):
         X_conv = self.conv1d(X_reshaped)
         X_conv_out = self.maxpool(F.relu(X_conv))
 
-        return torch.squeeze(X_conv_out)
+        return torch.squeeze(X_conv_out, -1)
 
 ### END YOUR CODE

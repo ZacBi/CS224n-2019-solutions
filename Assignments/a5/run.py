@@ -324,7 +324,7 @@ def main():
     args = docopt(__doc__)
 
     # Check pytorch version
-    assert(torch.__version__ == "1.0.0"), "Please update your installation of PyTorch. You have {} and you should have version 1.0.0".format(torch.__version__)
+    assert(torch.__version__ >= "1.0.0"), "Please update your installation of PyTorch. You have {} and you should have version 1.0.0".format(torch.__version__)
 
     # seed the random number generators
     seed = int(args['--seed'])
