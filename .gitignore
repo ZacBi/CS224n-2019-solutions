@@ -6,6 +6,7 @@ GPUTutorial.md
 **\__pycache__
 
 *.ipynb
+*.txt
 
 **\data
 **\model.bin
