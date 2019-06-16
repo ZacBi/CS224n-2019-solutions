@@ -92,8 +92,8 @@ It has been long time for no updating...
 
 ### practice
 
-- [ ] coding: Assignment5
-- [ ] writing: Assignment5
+- [x] coding: Assignment5
+- [x] writing: Assignment5
 
 ## Final project
 
@@ -102,7 +102,7 @@ It has been long time for no updating...
 - [x] final-project-practical-tips
 - [x] default-final-project-handout
 - [x] project-proposal-instructions
-- [ ] Practical Methodology_Deep Learning book chapter
+- [x] Practical Methodology_Deep Learning book chapter
 - [x] Highway Networks
 - [x] Bidirectional Attention Flow for Machine Comprehension
 
