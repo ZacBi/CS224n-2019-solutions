@@ -10,12 +10,13 @@ GPUTutorial.md
 *.npy
 *.pickle
 
-**\outputs
+# **\outputs
 **\en_es_data
 **\results
 **\data
 **\model.bin
 **\model.bin.optim
 **\.ipynb_checkpoints
+**\CS224n-A5-emb2-files
 
 
