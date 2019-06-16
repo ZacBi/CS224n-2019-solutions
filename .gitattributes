@@ -6,6 +6,6 @@
 # *.md linguist-language=markdown
 # *.ipynb linguist-language=jupyter_notebook
 
-Assignments/a4/model.bin filter=lfs diff=lfs merge=lfs -text
-Assignments/a4/model.bin.optim filter=lfs diff=lfs merge=lfs -text
+# Assignments/a4/model.bin filter=lfs diff=lfs merge=lfs -text
+# Assignments/a4/model.bin.optim filter=lfs diff=lfs merge=lfs -text
 
