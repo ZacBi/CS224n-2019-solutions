@@ -39,3 +39,7 @@ $$
 - Advantage: Preseved all data info, because we make a average.
 - Disadvantage: For other hand, if there is two many small values and only few big values, the strong signal dilutes and we just get a relatively small result(pattern or texture).
 
+## 2
+
+## (f)
+

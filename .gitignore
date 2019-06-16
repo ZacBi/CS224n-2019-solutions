@@ -7,6 +7,8 @@ GPUTutorial.md
 
 *.ipynb
 *.txt
+*.npy
+*.pickle
 
 **\data
 **\model.bin
