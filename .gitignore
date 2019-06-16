@@ -10,6 +10,7 @@ GPUTutorial.md
 *.npy
 *.pickle
 
+**\en_es_data
 **\results
 **\data
 **\model.bin
