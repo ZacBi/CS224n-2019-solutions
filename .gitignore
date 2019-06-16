@@ -11,7 +11,7 @@ GPUTutorial.md
 *.pickle
 
 # **\outputs
-# **\en_es_data
+**\en_es_data
 **\results
 **\data
 **\model.bin
