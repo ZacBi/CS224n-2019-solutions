@@ -15,5 +15,6 @@ GPUTutorial.md
 **\data
 **\model.bin
 **\model.bin.optim
+**\.ipynb_checkpoints
 
 
