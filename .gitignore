@@ -10,6 +10,7 @@ GPUTutorial.md
 *.npy
 *.pickle
 
+**\results
 **\data
 **\model.bin
 **\model.bin.optim
