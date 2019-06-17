@@ -104,3 +104,20 @@ $\mathrm{iii}.$
 &emsp;&emsp;Recall Word2Vec, it think simIlar words have similar context, i.e. a word is represented by its context, while CharCNN extract info from a window-based feature(vector/matrix), so these words similar in word structure will be close in feature space.
 
 ### (c)
+
+$\mathrm{i}.$
+1. Hoy estoy aqu para hablarles sobre crculos y epifanas.
+2. I'm here today to talk to you  about circles and epiphanies.
+3. I'm here to talk to you about circles and <unk>
+4. I'm here today to talk about circles and <u>episodes</u>.
+5. Incorrect example. episode and epiphanies are similar in word structure.
+
+$\mathrm{i}.$
+
+1. Bien, al da siguiente estbamos en Cleveland.
+2. Well, the next day we were in Cleveland.
+3. Well, the next day we were in <unk>
+4. Well, the next day we were in <u>Cleveland</u>, right?
+5. Acceptable. Maybe any word in corpus isn't similar to Cleveland except itself.
+
+
