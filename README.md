@@ -5,7 +5,7 @@
 Solutions for **CS224n, winter, 2019.**    
 Welcome to discuss problems appearing in assigments, **please** submit to issue.    
 Also take notes for the key point in lectures.
-The solutions for assignment is written by **Markdown**.
+The solutions for assignment is written by **Markdown** in [Assignments/written part](https://github.com/ZacBi/CS224n-2019-solutions/tree/master/Assignments/written%20part).
 &nbsp;
 - Course page: https://web.stanford.edu/class/cs224n
 - Video page: https://www.youtube.com/watch?v=8rXD5-xhemo&list=PLoROMvodv4rOhcuXMZkNm7j3fVwBBY42z
@@ -67,6 +67,7 @@ The solutions for assignment is written by **Markdown**.
 - [x] note:&emsp;Machine Translation, Sequence-to-sequence and Attention
 - [x] a4
 - [x] read:&emsp;Attention and Augmented Recurrent Neural Networks
+- [x] read:&emsp;Massive Exploration of Neural Machine Translation Architectures (practical advice for hyperparameter choices)
 
 ### practice
 
