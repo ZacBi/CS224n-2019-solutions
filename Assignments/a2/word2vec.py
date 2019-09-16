@@ -132,13 +132,19 @@ def negSamplingLossAndGradient(
     gradOutsideVecs[outsideWordIdx] += centerWordVec * (z - 1.0)
     gradCenterVec += outsideVectors[outsideWordIdx] * (z - 1.0)
 
-    for k in range(K):
-        samp = indices[k+1]
-        z = sigmoid(np.dot(-outsideVectors[samp], centerWordVec))
-        loss -= np.log(z)
-        gradOutsideVecs[samp] -=  centerWordVec * (z - 1.0)
-        gradCenterVec -= outsideVectors[samp] * (z - 1.0)
-
+    # Implementation with for loop
+    #for k in range(K):
+    #    samp = indices[k+1]
+    #    z = sigmoid(np.dot(-outsideVectors[samp], centerWordVec))
+    #    loss -= np.log(z)
+    #    gradOutsideVecs[samp] -=  centerWordVec * (z - 1.0)
+    #    gradCenterVec -= outsideVectors[samp] * (z - 1.0)
+    # Vectorized implementation
+    u_k = outsideVectors[negSampleWordIndices]
+    z = sigmoid(-np.dot(u_k,centerWordVec))
+    loss += np.sum(- np.log(z))
+    gradCenterVec += np.dot((z-1),u_k)*(-1)
+    gradOutsideVecs[negSampleWordIndices] += np.outer((z-1),centerWordVec)*(-1)
     ### END YOUR CODE
 
     return loss, gradCenterVec, gradOutsideVecs
