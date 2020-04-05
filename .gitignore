@@ -1,0 +1,12 @@
+# IDE
+.vscode
+
+# File
+*.txt
+*.npy
+*.pkl
+*.json
+
+# Folder
+**\.ipynb_checkpoints
+**\__pycache__

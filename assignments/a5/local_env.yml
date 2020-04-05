@@ -1,0 +1,14 @@
+name: local_nmt
+channels:
+  - soumith
+  - defaults
+dependencies:
+  - pytorch=1.0.0
+  - python=3.5
+  - numpy
+  - scipy
+  - tqdm
+  - docopt
+  - pytorch
+  - nltk
+  - torchvision
